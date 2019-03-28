@@ -141,7 +141,6 @@
 				41CE56AE2B809EC049F50D01 /* Pods-Flash Chat.debug.xcconfig */,
 				7655EE14D98B4F191410FAAD /* Pods-Flash Chat.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -199,6 +198,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

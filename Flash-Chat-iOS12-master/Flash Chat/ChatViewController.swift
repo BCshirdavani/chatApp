@@ -10,11 +10,8 @@ import UIKit
 import Firebase
 
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    
-    
-    
     // Declare instance variables here
 
     
@@ -35,11 +32,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         //TODO: Set yourself as the delegate of the text field here:
-
+        messageTextfield.delegate = self
         
         
         //TODO: Set the tapGesture here:
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        messageTableView.addGestureRecognizer(tapGesture)
         
 
         //TODO: Register your MessageCell.xib file here:
@@ -72,7 +70,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //TODO: Declare tableViewTapped here:
-    
+    @objc func tableViewTapped() {
+        messageTextfield.endEditing(true)
+    }
     
     
     //TODO: Declare configureTableView here:
@@ -86,21 +86,27 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK:- TextField Delegate Methods
     
-    
-
-    
     //TODO: Declare textFieldDidBeginEditing here:
-    
-    
-    
-    
-    //TODO: Declare textFieldDidEndEditing here:
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // keyboard height is 258 pts, 50pts is small view...258 + 50 = 308
+        // ⌘k to show keyboard in simulator
+        // use trailing closure for the animation function
+        UIView.animate(withDuration: 0.5) {
+            self.heightConstraint.constant = 358
+            self.view.layoutIfNeeded()   // if a constraint changed, redraw the view
+        }
+    }
 
-    
+    //TODO: Declare textFieldDidEndEditing here:
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.heightConstraint.constant = 50
+            self.view.layoutIfNeeded()
+        }
+    }
+
     ///////////////////////////////////////////
-    
-    
+
     //MARK: - Send & Recieve from Firebase
     
     
